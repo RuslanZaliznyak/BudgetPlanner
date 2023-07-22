@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Welcome Back, {{ user_name }}</h3>
+
+<div class="row">
+    {% include 'finance/dashboard/balance_card.html' %}
+    {% include 'finance/dashboard/goals_card.html' %}
+</div>
+
+<div class="row">
+    {% include 'finance/dashboard/budget_card.html' %}
+    {% include 'finance/dashboard/mandatory_payments_card.html' %}
+</div>
+
+<div class="row">
+    {% include 'finance/dashboard/loans_card.html' %}
+</div>
+
+<div class="row">
+    {% include 'finance/dashboard/transaction_history_card.html' %}
+    {% include 'finance/dashboard/daily_limit_card.html' %}
+</div>
+{% endblock %}

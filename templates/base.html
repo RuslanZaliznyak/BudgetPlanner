@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Моя сторінка</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Мій сайт</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Головна<span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Про нас</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Контакти</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="row">
+      <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+        <div class="position-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="/finance/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/finance/add-transaction">Add transaction</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/finance/add-budget">Add budget</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/finance/add-wallets">Add wallets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/finance/add-loan">Add wallets</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/finance/add-mandatory-pay">Add wallets</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="form">
+          {% block content %}
+
+          {% endblock %}
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

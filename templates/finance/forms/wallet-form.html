@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="wallet_account"></div>
+        <h1>Add a new transaction</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+            <div class="form-group">
+                <label for="wallet_name">Wallet name</label>
+                <input type="text" name="wallet_name" id="wallet_name">
+            </div>
+    
+            <div class="form-group">
+                <label for="wallet_amount">Wallet amount</label>
+                <input type="number" name="wallet_amount" id="wallet_amount">
+            </div>
+    
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+
+    <div class="bank_account"></div>
+        <h1>Bank account</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+            <div class="form-group">
+                <label for="wallet_name">Bank account name</label>
+                <input type="text" name="bank_account_name" id="bank_account_name">
+            </div>
+    
+            <div class="form-group">
+                <label for="wallet_amount">Bank amount</label>
+                <input type="number" name="bank_amount" id="bank_amount">
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+{% endblock %}
