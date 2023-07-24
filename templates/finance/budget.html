@@ -1,0 +1,21 @@
+<div class="card-header">
+    Budget Details
+</div>
+<div class="card-body">
+    <p><strong>User ID:</strong> {{ budget.user_id }}</p>
+    <p><strong>Name:</strong> {{ budget.name }}</p>
+    <p><strong>Daily Limit Amount:</strong> {{ budget.daily_limit_amount }}</p>
+    <p><strong>Limit Amount:</strong> {{ budget.limit_amount }}</p>
+    <p><strong>Limit Period ID:</strong> {{ budget.limit_period_id }}</p>
+
+    <div class="daily-limit">
+        {% if budget_daily_limit.total_transactions > budget.daily_limit_amount %}
+        <h1 style="color: red;">Daily limit {{ budget_daily_limit.daily_limit }} spend of {{ budget_daily_limit.total_transactions }}</h1>
+        {% else %}
+        <h1>Daily limit {{ budget_daily_limit.daily_limit }} / {{ budget_daily_limit.total_transactions }}</h1>
+        {% endif %}
+
+        <p>{{ budget_daily_limit.exceed_percentage }} %</p>
+    </div>
+
+</div>

@@ -1,0 +1,14 @@
+<div class="card-header">
+    Wallet Details
+</div>
+
+{% for wallet in wallets %}
+
+  <div class="card-body">
+      <p><strong>User ID:</strong> {{ wallet.user_id }}</p>
+      <p><strong>Name:</strong> {{ wallet.name }}</p>
+      <p><strong>Amount:</strong> {{ wallet.amount }}</p>
+      <p><strong>Currency:</strong> {{ wallet.currency }}</p>
+  </div>
+
+{% endfor %}

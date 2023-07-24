@@ -56,3 +56,4 @@ class Transaction(models.Model):
     )
 
     datetime = models.DateTimeField()
+

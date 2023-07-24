@@ -1,0 +1,25 @@
+{% include 'finance/base.html' %}
+
+{% block content %}
+
+{{ period }}
+
+<h3>Transactions</h3>
+<div class="table">
+  {% include 'finance/transactions_table.html' %}
+</div>
+
+<h3>Budget</h3>
+<div class="card">
+  {% include 'finance/budget.html' %}
+</div>
+
+<h3>
+  <div class="card">
+    {% include 'finance/top-activity.html' %}
+  </div>
+</h3>
+
+
+
+{% endblock %}

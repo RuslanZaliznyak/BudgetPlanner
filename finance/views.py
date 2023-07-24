@@ -1,38 +1,21 @@
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpRequest
 from django.shortcuts import render
-
-categories = [
-    'Groceries',
-    'Transportation',
-    'Entertainment',
-    'Utilities',
-    'Healthcare',
-    'Travel',
-    'Clothing',
-    'Education',
-    'Housing',
-    'Miscellaneous',
-]
+from finance.services.view.dashboard import Dashboard
 
 
 def dashboard(request: HttpRequest):
-    return render(request, 'finance/dashboard/dashboard.html',
-                  context={
-                      'user_name': 'TEST USER',
-                      'current_balance': 'BALANCE_COUNT',
-                      'total_income': 'TOTAL_INCOME',
-                      'total_expense': 'TOTAL_EXPENSE',
-                      'cards': None,
-                      'transactions': ['one', 'two', 'three'],
-                  })
+    user_id = request.user.id
+    content = Dashboard.get_content(user_id)
+
+    return render(request, 'finance/dashboard.html',
+                  context=content)
 
 
-def add_transaction(request: HttpRequest):
+"""def add_transaction(request: HttpRequest):
     if request.method == 'POST':
         category = request.POST.dict()
-        print(category)
 
-    return render(request, 'finance/transaction-form.html',
+    return render(request, 'finance/forms/transaction-form.html',
                   context={'categories': categories,
                            'transaction_types': ['Income',
                                                  'Expense'],
@@ -81,4 +64,4 @@ def add_mandatory_pay(request: HttpRequest):
         category = request.POST.dict()
         print(category)
 
-    return render(request, 'finance/mandatory-pay-form.html')
+    return render(request, 'finance/mandatory-pay-form.html')"""

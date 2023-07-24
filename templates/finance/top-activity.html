@@ -1,0 +1,6 @@
+{% for key, values in categories.items %}
+    <p>{{ key }}</p>
+    <p>Total amount: {{ values.total_amount }} $</p>
+    <p>Percentage: {{ values.percentage }}%</p>
+    <p>-------------------</p>
+{% endfor %}

@@ -1,0 +1,12 @@
+<div class="card-header">
+    Bank Account Details
+</div>
+
+{% for bank_account in bank_accounts %}
+<div class="card-body">
+    <p><strong>User ID:</strong> {{ bank_account.user_id }}</p>
+    <p><strong>Name:</strong> {{ bank_account.name }}</p>
+    <p><strong>Amount:</strong> {{ bank_account.amount }}</p>
+    <p><strong>Currency:</strong> {{ bank_account.currency }}</p>
+</div>
+{% endfor %}
