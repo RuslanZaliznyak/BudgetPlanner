@@ -1,12 +1,8 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-
-class PaymentMethod(models.Model):
-    method = models.CharField(max_length=15)
-
-    def __str__(self):
-        return self.method
+from finance.models.account import Currency
+from finance.models.wallet import PaymentMethod
 
 
 class Description(models.Model):
@@ -17,43 +13,51 @@ class Description(models.Model):
 
 
 class TransactionType(models.Model):
-    name = models.CharField(max_length=50)
+    TRANSACTION_TYPES = (
+        ('income', 'Income'),
+        ('expense', 'Expense')
+    )
+    name = models.CharField(max_length=50, choices=TRANSACTION_TYPES)
 
     def __str__(self):
-        return self.name
+        return str(self.name).capitalize()
 
 
 class TransactionCategory(models.Model):
     name = models.CharField(max_length=50)
+    is_required = models.BooleanField(default=False)
+    is_loan = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return f'{self.name}'
 
 
 class Transaction(models.Model):
-    user_id = models.ForeignKey(
+    user = models.ForeignKey(
         User,
-        on_delete=models.CASCADE)
-
-    category_id = models.ForeignKey(
+        on_delete=models.CASCADE
+    )
+    category = models.ForeignKey(
         TransactionCategory,
-        on_delete=models.DO_NOTHING)
-
-    transaction_type_id = models.ForeignKey(
+        on_delete=models.DO_NOTHING
+    )
+    transaction_type = models.ForeignKey(
         TransactionType,
-        on_delete=models.DO_NOTHING)
-
+        on_delete=models.DO_NOTHING
+    )
     amount = models.DecimalField(decimal_places=2, max_digits=10)
-
-    description_id = models.ForeignKey(
+    description = models.ForeignKey(
         Description,
-        on_delete=models.DO_NOTHING
+        on_delete=models.DO_NOTHING,
+        null=True, blank=True
     )
-
-    payment_method_id = models.ForeignKey(
+    payment_method = models.ForeignKey(
         PaymentMethod,
-        on_delete=models.DO_NOTHING
+        on_delete=models.CASCADE
     )
-
-    datetime = models.DateTimeField()
-
+    currency = models.ForeignKey(
+        Currency,
+        on_delete=models.DO_NOTHING,
+        related_name='dashboard'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)

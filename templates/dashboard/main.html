@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+
+{% block content-fluid %}
+<div class="content-wrapper">
+    <div class="left-content">
+      {% include 'dashboard/bar.html' %}
+    </div>
+
+    <div class="center-content">
+      <button type="submit">New transaction</button>
+      <div class="calendar">
+        {% include 'dashboard/calendar.html' %}
+      </div>
+
+      <div class="transaction-summary">
+        {% include 'dashboard/total-daily-transactions.html' %}
+      </div>
+
+      <div class="daily-transactions">
+        {% include 'dashboard/transaction-list.html' %}
+      </div>
+    </div>
+
+    <div class="right-content">
+      <div class="monthly-overview">
+        {% include 'dashboard/monthly-overview.html' %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+

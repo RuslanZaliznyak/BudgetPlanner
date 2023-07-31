@@ -1,0 +1,62 @@
+{% load static %}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.left-content, .right-content {
+  weight: 25%;
+  background-color: yellow;
+}
+
+.right-content {
+  weight: 35%;
+  background-color: blue;
+}
+
+.center-content {
+  weight: 40%
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: cyan;
+}
+
+
+.expense {
+  float: left;
+  width: auto;
+  padding: 5px;
+}
+
+.income {
+  float: right;
+  width: auto;
+  padding: 5px;
+}
+
+.total-card::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.accounts-list li::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: -15px;
+  background-image: url('{% static "img/icons/dot-icon.png" %}');
+  background-size: contain; /* або 'contain', залежить від вашого вибору */
+}
+
+

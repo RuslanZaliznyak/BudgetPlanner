@@ -1,0 +1,35 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+<div class="monthly-overview">
+  <h3>Monthly overview</h3>
+
+  <div class="total-card">
+    <div class="expense">
+      <img src="{% static 'img/INCOME.png' %}" alt="expense">
+    </div>
+
+    <div class="income">
+      <img src="{% static 'img/expense.png' %}" alt="income">
+    </div>
+  </div>
+
+</div>
+
+<div class="summary-expense">
+  <h3>Expenses by category</h3>
+  <div class="expense-cards">
+    {% for category in expense_categories %}
+      <div class="card">
+        <h4>{{ category }}</h4>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+
+
+
+
+
+

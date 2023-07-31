@@ -1,0 +1,22 @@
+<tr>
+    <th>User</th>
+    <th>Category</th>
+    <th>Transaction Type</th>
+    <th>Amount</th>
+    <th>Description</th>
+    <th>Payment Method</th>
+    <th>Currency</th>
+    <th>Created At</th>
+</tr>
+{% for transaction in transactions %}
+<tr>
+    <td>{{ transaction.user }}</td>
+    <td>{{ transaction.category }}</td>
+    <td>{{ transaction.transaction_type }}</td>
+    <td>{{ transaction.amount }}</td>
+    <td>{{ transaction.description }}</td>
+    <td>{{ transaction.payment_method }}</td>
+    <td>{{ transaction.currency }}</td>
+    <td>{{ transaction.created_at }}</td>
+</tr>
+{% endfor %}

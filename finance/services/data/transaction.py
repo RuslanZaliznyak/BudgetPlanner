@@ -2,7 +2,7 @@ import datetime
 
 from django.db.models import Sum
 from django.utils import timezone
-from finance.models.transaction import Transaction
+from finance.models.transaction import Transaction, TransactionCategory
 import pandas as pd
 
 
@@ -10,11 +10,22 @@ class TransactionData:
     @classmethod
     def get_all_by_user(cls, user_id):
         try:
-            result = Transaction.objects.filter(user_id=user_id)
-            return result
+            transactions = Transaction.objects.select_related('payment_method').filter(user_id=user_id)
+            return transactions
         except Transaction.DoesNotExist:
-            # If the result is None, returns an empty object
             return Transaction.objects.none()
+        except Exception as e:
+            print(f"Error: {e}")
+            return None
+
+    @classmethod
+    def get_all_categories(cls, user_id):
+        try:
+            # BUG
+            result = TransactionCategory.objects.all()
+            return result
+        except TransactionCategory.DoesNotExist:
+            return TransactionCategory.objects.none()
         except Exception as e:
             print(f"Error: {e}")
             return None
@@ -40,7 +51,7 @@ class TransactionData:
             'user_id', 'category_id', 'transaction_type_id', 'description_id', 'payment_method_id'
         ).filter(
             user_id=user_id,
-            datetime__range=(start_date, end_date)
+            created_at__range=(start_date, end_date)
         )
         return transactions
 
@@ -64,5 +75,6 @@ class TransactionData:
         df['percentage'] = round((df['total_amount'] / total_sum) * 100, 2)
         percentage_data = df.set_index('category_id__name').to_dict(orient='index')
 
-        print(percentage_data)
         return percentage_data
+
+

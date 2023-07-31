@@ -1,14 +1,19 @@
 from django.http import HttpRequest
 from django.shortcuts import render
-from finance.services.view.dashboard import Dashboard
+from finance.services.render.dashboard import Dashboard
+from finance.services.render.transactions import TransactionsPage
 
 
-def dashboard(request: HttpRequest):
+def dashboard_page(request: HttpRequest):
     user_id = request.user.id
-    content = Dashboard.get_content(user_id)
+    content_render = Dashboard.get_content(user_id)
+    return render(request, 'dashboard/main.html', context=content_render)
 
-    return render(request, 'finance/dashboard.html',
-                  context=content)
+
+def transactions_page(request: HttpRequest):
+    user_id = request.user.id
+    content_render = TransactionsPage.get_content(user_id)
+    return render(request, 'transactions/main.html', context=content_render)
 
 
 """def add_transaction(request: HttpRequest):

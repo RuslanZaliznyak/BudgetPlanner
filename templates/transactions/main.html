@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/transactions.css' %}">
+
+{% block content-fluid %}
+
+<div class="transactions-list">
+    {% include 'transactions/table-filter.html' %}
+    <table class="table table-striped table-dark">
+        {% include 'transactions/all-transactions.html' %}
+    </table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Category</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Payment Method</th>
+      <th scope="col">Create at</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for transaction in transactions %}
+    <tr>
+      <td><img src="" alt="receiver icon"></td>
+      <td scope="row">{{ transaction.category }}</td>
+      <td scope="row">{{ transaction.transaction_type }}</td>
+      <td scope="row">{{ transaction.amount }}</td>
+      <td scope="row">{{ transaction.description }}</td>
+      <td scope="row">{{ transaction.payment_method }}</td>
+      <td scope="row">{{ transaction.created_at }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>

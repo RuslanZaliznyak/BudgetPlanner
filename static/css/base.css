@@ -1,0 +1,20 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.split-layout {
+  display: flex;
+  height: 100%;
+}
+
+.sidebar {
+  flex: 0 0 5%;
+  background-color: red;
+}
+
+.container-fluid {
+  flex: 1;
+  background-color: green;
+}
