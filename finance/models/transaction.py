@@ -3,6 +3,7 @@ from django.db import models
 
 from finance.models.account import Currency
 from finance.models.wallet import PaymentMethod
+from finance_manager import settings
 
 
 class Description(models.Model):
@@ -34,7 +35,7 @@ class TransactionCategory(models.Model):
 
 class Transaction(models.Model):
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
     )
     category = models.ForeignKey(

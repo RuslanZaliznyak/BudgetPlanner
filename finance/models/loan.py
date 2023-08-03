@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from finance_manager import settings
+
 
 class Loan(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     loan_name = models.OneToOneField('TransactionCategory', on_delete=models.CASCADE)
     principal_amount = models.DecimalField(decimal_places=2, max_digits=10)
     start_date = models.DateField()

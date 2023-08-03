@@ -1,13 +1,15 @@
 from django.contrib.auth.models import User
 from django.db import models
 
+from finance_manager import settings
+
 
 class LimitPeriod(models.Model):
     value = models.DurationField()
 
 
 class Budget(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=50, default=None, blank=False, null=False)
     description = models.TextField(blank=True)
     daily_limit_amount = models.DecimalField(decimal_places=2, max_digits=10, default=None)

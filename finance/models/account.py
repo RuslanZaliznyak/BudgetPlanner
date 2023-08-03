@@ -3,6 +3,7 @@ from django.db import models
 
 from finance.models.budget import Budget
 from finance.models.loan import Loan
+from finance_manager import settings
 
 
 class Currency(models.Model):
@@ -23,7 +24,7 @@ class Account(models.Model):
         ('business', 'Business account')
     )
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=20, blank=False, null=False)
     main_currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     description = models.CharField(max_length=128, null=True, blank=True)
