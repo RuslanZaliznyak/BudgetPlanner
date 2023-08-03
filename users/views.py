@@ -11,17 +11,18 @@ from .forms import UserRegistrationForm
 from .services.emails import send_registration_email
 from .utils.token_generator import TokenGenerator
 
+
 def index_view(request):
-    return render(request, 'index.html')
+    return render(request, 'users_auth/index.html')
 
 
 class UserLoginView(LoginView):
     def get_default_redirect_url(self):
-        return reverse('index')
+        return reverse('index_view')
 
 
 class UserLogoutView(LogoutView):
-    next_page = reverse_lazy('users.user_login')
+    next_page = reverse_lazy('users.login')
 
 
 class UserRegistrationView(CreateView):
