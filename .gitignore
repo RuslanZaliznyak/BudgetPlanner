@@ -1,5 +1,9 @@
 .idea
 .env
-/__pycache__
+__pycache__
 /venv
-/migrations
+migrations
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
