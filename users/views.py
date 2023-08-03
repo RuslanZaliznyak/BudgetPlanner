@@ -1,25 +1,15 @@
-from django import forms
-from django.conf import settings
-from django.contrib.auth import logout, get_user_model, login
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.views import LoginView, LogoutView
-from django.core.mail import send_mail
-from django.core.mail.backends.smtp import EmailBackend
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.utils.encoding import force_str
-from django.utils.http import urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_decode
 from django.views.generic import CreateView, RedirectView
 
 from .forms import UserRegistrationForm
 from .services.emails import send_registration_email
 from .utils.token_generator import TokenGenerator
-
-
-class EmailMessageForm(forms.Form):
-    email = forms.EmailField(max_length=100)
-    message = forms.CharField(widget=forms.Textarea)
-
 
 def index_view(request):
     return render(request, 'index.html')
@@ -57,16 +47,24 @@ class ActivateUserView(RedirectView):
 
     def get(self, request, uuid64, token, *args, **kwargs):
         try:
-            pk = force_str(urlsafe_base64_encode(uuid64))
-            current_user = get_user_model().object.get(pk=pk)
+            pk = force_str(urlsafe_base64_decode(uuid64))
+
+            current_user = get_user_model().objects.get(pk=pk)
         except (get_user_model().DoesNotExist, TypeError, ValueError):
-            return HttpResponse('Wrong data')
+            return HttpResponse('User does not exist')
 
         if current_user and TokenGenerator().check_token(current_user, token):
             current_user.is_active = True
             current_user.save()
 
             login(request, current_user)
-            return super().get(request, *args, *kwargs)
+            return super().get(request, *args, **kwargs)
 
-        return HttpResponse('Wrong data')
+        return HttpResponse('Wrong data 2')
+
+
+
+
+
+
+
