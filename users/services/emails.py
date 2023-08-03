@@ -17,7 +17,6 @@ def send_registration_email(request, user_instance):
             'token': TokenGenerator().make_token(user_instance)
         }
     )
-    print(message)
 
     email = EmailMessage(
         subject='blabla',

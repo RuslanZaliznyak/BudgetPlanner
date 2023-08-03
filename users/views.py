@@ -55,9 +55,9 @@ class UserRegistrationView(CreateView):
 class ActivateUserView(RedirectView):
     url = reverse_lazy('index')
 
-    def get(self, request, uuid, token, *args, **kwargs):
+    def get(self, request, uuid64, token, *args, **kwargs):
         try:
-            pk = force_str(urlsafe_base64_encode(uuid))
+            pk = force_str(urlsafe_base64_encode(uuid64))
             current_user = get_user_model().object.get(pk=pk)
         except (get_user_model().DoesNotExist, TypeError, ValueError):
             return HttpResponse('Wrong data')

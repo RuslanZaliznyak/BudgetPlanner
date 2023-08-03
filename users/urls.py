@@ -7,5 +7,9 @@ urlpatterns = [
     path('login/', UserLoginView.as_view(), name='user_login'),
     path('logout/', UserLogoutView.as_view(), name='user_logout'),
     path('register/', UserRegistrationView.as_view(), name='user_registration'),
-    path('activate/<uuid:uuid>/<str:token>/', ActivateUserView.as_view(), name='activate_user'),
+    path(
+        'activate/<str:uuid64>/<str:token>/',
+        ActivateUserView.as_view(),
+        name='activate'
+    )
 ]
