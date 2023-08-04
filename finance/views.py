@@ -1,72 +1,48 @@
 from django.http import HttpRequest
 from django.shortcuts import render
+from django.views import View
+from django.views.generic import TemplateView, ListView, CreateView
+
+from finance.forms.transaction_form import TransactionForm
+from finance.models.transaction import Transaction
+from finance.services.data.account import AccountData
+from finance.services.data.transaction import TransactionData
 from finance.services.render.dashboard import Dashboard
 from finance.services.render.transactions import TransactionsPage
 
 
-def dashboard_page(request: HttpRequest):
-    user_id = request.user.id
-    content_render = Dashboard.get_content(user_id)
-    return render(request, 'dashboard/main.html', context=content_render)
+class DashboardView(TemplateView):
+    template_name = 'dashboard/dashboard.html'
+
+    @staticmethod
+    def get_content(user_id):
+        return {
+            'transactions': TransactionData.get_all_by_user(user_id),
+            'accounts': AccountData.get_all_by_user(user_id),
+            'categories': TransactionData.get_all_categories(user_id),
+            'expense_categories': [1, 2, 3]
+        }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_id = self.request.user.id
+        context.update(self.get_content(user_id))
+        return context
 
 
-def transactions_page(request: HttpRequest):
-    user_id = request.user.id
-    content_render = TransactionsPage.get_content(user_id)
-    return render(request, 'transactions/main.html', context=content_render)
+class TransactionsView(ListView):
+    template_name = 'transactions/transactions.html'
+    model = Transaction
+    context_object_name = 'transactions'
 
 
-"""def add_transaction(request: HttpRequest):
-    if request.method == 'POST':
-        category = request.POST.dict()
+class NewTransactionView(CreateView):
+    template_name = 'transactions/new-transaction.html'
+    form_class = TransactionForm
+    success_url = '/finance/transactions'
 
-    return render(request, 'finance/forms/transaction-form.html',
-                  context={'categories': categories,
-                           'transaction_types': ['Income',
-                                                 'Expense'],
-                           'payment_methods': ['Cash',
-                                               'Debit card',
-                                               'Credit card'],
-                           'budgets': ['budget1', 'budget2']
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.save()
 
-                           })
-
-
-def add_budget(request: HttpRequest):
-    if request.method == 'POST':
-        category = request.POST.dict()
-        print(category)
-
-    return render(request, 'finance/forms/budget-form.html',
-                  context={
-                      'wallets': ['(wallet_name: amount)',
-                                  '(wallet_name2: amount2)',
-                                  '(wallet_name3: amount3)'],
-                      'bank_accounts': ['(bank_name: amount)',
-                                        '(bank_name2: amount2)',
-                                        '(bank_name3: amount3)']
-                  })
-
-
-def add_wallets(request: HttpRequest):
-    if request.method == 'POST':
-        category = request.POST.dict()
-        print(category)
-
-    return render(request, 'finance/wallet-form.html')
-
-
-def add_loan(request: HttpRequest):
-    if request.method == 'POST':
-        category = request.POST.dict()
-        print(category)
-
-    return render(request, 'finance/loan-form.html')
-
-
-def add_mandatory_pay(request: HttpRequest):
-    if request.method == 'POST':
-        category = request.POST.dict()
-        print(category)
-
-    return render(request, 'finance/mandatory-pay-form.html')"""
+        return super().form_valid(form)
