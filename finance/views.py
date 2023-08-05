@@ -11,9 +11,7 @@ from finance.services.render.dashboard import Dashboard
 from finance.services.render.transactions import TransactionsPage
 
 
-class DashboardView(TemplateView):
-    template_name = 'dashboard/dashboard.html'
-
+class DashboardView(View):
     @staticmethod
     def get_content(user_id):
         return {
@@ -23,11 +21,16 @@ class DashboardView(TemplateView):
             'expense_categories': [1, 2, 3]
         }
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user_id = self.request.user.id
-        context.update(self.get_content(user_id))
-        return context
+    template = 'dashboard/dashboard.html'
+
+    def get(self, request):
+        return render(request,
+                      template_name=self.template,
+                      context=self.get_content(request.user.id))
+
+    def post(self, request):
+        if 'new-transactions' in request.post:
+            print('new-t')
 
 
 class TransactionsView(ListView):
