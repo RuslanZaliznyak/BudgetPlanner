@@ -16,15 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-from users.views import index_view, UserLoginView, UserLogoutView, UserRegistrationView
+from django.contrib.auth.decorators import login_required
+from finance.views import DashboardView, TransactionsView, NewTransactionView
+from finance_manager.views import Index
+from users.views import UserLoginView, UserLogoutView, UserRegistrationView
 
 urlpatterns = [
-    path('index/', index_view, name='index'),
-    path('login/', UserLoginView.as_view(), name='user_login'),
-    path('logout/', UserLogoutView.as_view(), name='user_logout'),
-    path('register/', UserRegistrationView.as_view(), name='user_registration'),
-    path('users/', include('users.urls')),
-    path('finance/', include('finance.urls')),
-    path('admin/', admin.site.urls)
+    path('', login_required(Index.as_view()), name='index'),
+    path('admin/', admin.site.urls),
+
+    path('', include('users.urls')),
+    path('', login_required(include('finance.urls')))
 ]

@@ -12,23 +12,19 @@ from .services.emails import send_registration_email
 from .utils.token_generator import TokenGenerator
 
 
-def index_view(request):
-    return render(request, 'users_auth/index.html')
-
-
 class UserLoginView(LoginView):
     def get_default_redirect_url(self):
-        return reverse('index_view')
+        return reverse('dashboard')
 
 
 class UserLogoutView(LogoutView):
-    next_page = reverse_lazy('login')
+    next_page = reverse_lazy('users:user_login')
 
 
 class UserRegistrationView(CreateView):
     template_name = 'users_auth/registration_form.html'
     form_class = UserRegistrationForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('dashboard')
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
@@ -44,7 +40,7 @@ class UserRegistrationView(CreateView):
 
 
 class ActivateUserView(RedirectView):
-    url = reverse_lazy('index')
+    url = reverse_lazy('users:login')
 
     def get(self, request, uuid64, token, *args, **kwargs):
         try:

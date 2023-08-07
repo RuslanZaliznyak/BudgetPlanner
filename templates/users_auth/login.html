@@ -1,6 +1,6 @@
 {% extends 'users_auth/base.html' %}
 
-{% block container-field %}
+{% block container-fluid %}
 
   <div class="center">
 	  <form method="post" class="card" novalidate>
@@ -17,7 +17,7 @@
 		<input type="submit" value="Login" class="btn btn-primary full-width">
 		<hr>
 		<p class="text-center">Forgot your password <a href="#">Reset Password</a></p>
-		<p class="text-center">Don't have an account? <a href="#">Join Now</a></p>
+		<p class="text-center">Don't have an account? <a href="{% url 'users:user_registration' %}">Join Now</a></p>
 	</form>
 </div>
 

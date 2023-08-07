@@ -1,4 +1,3 @@
-from django.http import HttpRequest
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import TemplateView, ListView, CreateView
@@ -7,8 +6,6 @@ from finance.forms.transaction_form import TransactionForm
 from finance.models.transaction import Transaction
 from finance.services.data.account import AccountData
 from finance.services.data.transaction import TransactionData
-from finance.services.render.dashboard import Dashboard
-from finance.services.render.transactions import TransactionsPage
 
 
 class DashboardView(View):
@@ -38,9 +35,13 @@ class TransactionsView(ListView):
     model = Transaction
     context_object_name = 'transactions'
 
+    @classmethod
+    def create_form(cls, request):
+        pass
+
 
 class NewTransactionView(CreateView):
-    template_name = 'transactions/new-transaction.html'
+    template_name = 'transactions/form.html'
     form_class = TransactionForm
     success_url = '/finance/transactions'
 

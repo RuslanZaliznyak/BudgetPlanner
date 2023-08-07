@@ -1,11 +1,9 @@
 {% extends 'users_auth/base.html' %}
 
 {% block container-fluid %}
-
 <form action="" method="POST">
     {% csrf_token %}
     {{ form.as_ul }}
     <button type="submit">Click</button>
 </form>
-
-{% endblock %}ç
+{% endblock %}
