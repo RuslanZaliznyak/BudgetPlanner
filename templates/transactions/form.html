@@ -1,12 +1,19 @@
-{% extends 'base.html' %}
+<form
+    hx-post="{% url 'finance:create-transaction' %}"
+    hx-target="#transactions-list"
+    hx-swap="beforeend"
+    hx-on="htmx:afterRequest: this.remove()"
+    hx-trigger="click from:#submit-all"
+>
+    <div class="row">
+        {{ form.as_p}}
+    </div>
 
-{% block container-fluid %}
-
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_ul }}
-    <button type="submit">Click</button>
+    <div class="col-3 align-self-end">
+        <button type="button" class="btn btn-danger"
+            hx-on="click: this.closest('form').remove()"
+        >
+            Cancel
+        </button>
+    </div>
 </form>
-
-
-{% endblock %}

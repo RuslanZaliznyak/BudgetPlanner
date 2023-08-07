@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block container-fluid %}
+
+<div id="transaction-forms">
+  {% include 'transactions/form.html' %}
+</div>
+<div class="my-4">
+  <button type="button" class="btn btn-success me-2"
+      hx-get="{% url 'finance:create-transaction' %}"
+      hx-target="#transaction-forms"
+      hx-swap="beforeend">+ Add form</button>
+  <button type="button" class="btn btn-primary" id="submit-all">Sumbit all</button>
+</div>
+
+<ul id="transactions-list">
+  {% for transaction in transactions %}
+    {% include 'transactions/transaction.html' %}
+  {% endfor %}
+</ul>
+
+{% endblock %}
+

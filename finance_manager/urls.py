@@ -17,14 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth.decorators import login_required
-from finance.views import DashboardView, TransactionsView, NewTransactionView
+from finance.views import DashboardView, TransactionsView
 from finance_manager.views import Index
 from users.views import UserLoginView, UserLogoutView, UserRegistrationView
 
 urlpatterns = [
-    path('', login_required(Index.as_view()), name='index'),
+    path('', Index.as_view(), name='index'),
     path('admin/', admin.site.urls),
 
     path('', include('users.urls')),
-    path('', login_required(include('finance.urls')))
+    path('', include('finance.urls'))
 ]

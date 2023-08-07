@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View
 from django.views.generic import TemplateView, ListView, CreateView
 
-from finance.forms.transaction_form import TransactionForm
+from finance.forms.transaction import TransactionForm
 from finance.models.transaction import Transaction
 from finance.services.data.account import AccountData
 from finance.services.data.transaction import TransactionData
@@ -35,18 +35,40 @@ class TransactionsView(ListView):
     model = Transaction
     context_object_name = 'transactions'
 
-    @classmethod
-    def create_form(cls, request):
-        pass
+
+# Func who renders page with transactions forms - TO REDESIGN
+def add_transactions(request):
+    user_id = request.user.id
+    context = {'form': TransactionForm(),
+               'transactions': Transaction.objects.filter(user_id=user_id)}
+    return render(request,
+                  'transactions/add-transactions.html',
+                  context=context)
 
 
-class NewTransactionView(CreateView):
-    template_name = 'transactions/form.html'
-    form_class = TransactionForm
-    success_url = '/finance/transactions'
+class CreateTransaction(View):
+    def get(self, request):
+        print('get request')
+        return render(request,
+                      'transactions/form.html',
+                      context={'form': TransactionForm()})
 
-    def form_valid(self, form):
-        self.object = form.save(commit=False)
-        self.object.save()
+    def post(self, request):
+        user_id = request.user.id
+        form = TransactionForm(request.POST or None)
 
-        return super().form_valid(form)
+        if form.is_valid():
+            transaction = form.save(commit=False)
+            transaction.user_id = user_id
+            transaction.save()
+
+            context = {'transaction': transaction}
+            return render(request,
+                          'transactions/transaction.html',
+                          context=context)
+
+
+
+
+
+
