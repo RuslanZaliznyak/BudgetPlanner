@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 
 {% block container-fluid %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/transactions.css' %}">
 
-<div id="transaction-forms">
-  {% include 'transactions/form.html' %}
-</div>
 <div class="my-4">
   <button type="button" class="btn btn-success me-2"
       hx-get="{% url 'finance:create-transaction' %}"
@@ -13,11 +12,25 @@
   <button type="button" class="btn btn-primary" id="submit-all">Sumbit all</button>
 </div>
 
-<ul id="transactions-list">
-  {% for transaction in transactions %}
-    {% include 'transactions/transaction.html' %}
-  {% endfor %}
-</ul>
+<div id="transaction-forms">
+      {% include 'transactions/form.html' %}
+</div>
+
+<table id="transactions-list" class="table table-striped table-light">
+  <thead>
+    <tr>
+      <th>Категорія</th>
+      <th>Тип транзакції</th>
+      <th>Дата створення</th>
+      <th>Сума</th>
+    </tr>
+  </thead>
+  <tbody id="table-body">
+    {% for transaction in transactions %}
+      {% include 'transactions/transaction.html' %}
+    {% endfor %}
+  </tbody>
+</table>
 
 {% endblock %}
 

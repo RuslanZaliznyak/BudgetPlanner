@@ -1,6 +1,6 @@
-<li>
-    {{ transaction.category }}
-    {{ transaction.transaction_type }}
-    {{ transaction.created_at }}
-    {{ transaction.amount }}
-</li>
+<tr id="transaction-{{ transaction.id }}">
+  <td>{{ transaction.category }}</td>
+  <td>{{ transaction.transaction_type }}</td>
+  <td>{{ transaction.created_at }}</td>
+  <td>{{ transaction.amount }}</td>
+</tr>

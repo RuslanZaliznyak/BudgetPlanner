@@ -1,19 +1,27 @@
 <form
     hx-post="{% url 'finance:create-transaction' %}"
     hx-target="#transactions-list"
-    hx-swap="beforeend"
+    hx-swap="afterend"
     hx-on="htmx:afterRequest: this.remove()"
     hx-trigger="click from:#submit-all"
 >
-    <div class="row">
-        {{ form.as_p}}
-    </div>
-
     <div class="col-3 align-self-end">
         <button type="button" class="btn btn-danger"
-            hx-on="click: this.closest('form').remove()"
-        >
+            hx-on="click: this.closest('form').remove()">
             Cancel
         </button>
+    </div>
+
+    <div class="table-as-form">
+        <table class="table table-striped table-light">
+          <tbody>
+            <tr>
+              {% for field in form %}
+                <th>{{ field.label_tag }}</th>
+                <td>{{ field }}</td>
+              {% endfor %}
+            </tr>
+          </tbody>
+        </table>
     </div>
 </form>

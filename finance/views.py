@@ -40,7 +40,7 @@ class TransactionsView(ListView):
 def add_transactions(request):
     user_id = request.user.id
     context = {'form': TransactionForm(),
-               'transactions': Transaction.objects.filter(user_id=user_id)}
+               'transactions': Transaction.objects.filter(user_id=user_id).order_by('-created_at')}
     return render(request,
                   'transactions/add-transactions.html',
                   context=context)
