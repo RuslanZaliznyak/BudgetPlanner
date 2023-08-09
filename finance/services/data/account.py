@@ -5,8 +5,8 @@ class AccountData:
     @classmethod
     def get_all_by_user(cls, user_id):
         try:
-            transactions = Account.objects.filter(user_id=user_id)
-            return transactions
+            accounts = Account.objects.filter(user_id=user_id)
+            return accounts
         except Account.DoesNotExist:
             return Account.objects.none()
         except Exception as e:

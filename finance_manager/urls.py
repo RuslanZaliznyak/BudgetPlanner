@@ -22,7 +22,7 @@ from finance_manager.views import Index
 from users.views import UserLoginView, UserLogoutView, UserRegistrationView
 
 urlpatterns = [
-    path('', Index.as_view(), name='index'),
+    path('', login_required(Index.as_view()), name='index'),
     path('admin/', admin.site.urls),
 
     path('', include('users.urls')),

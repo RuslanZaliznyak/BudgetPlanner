@@ -16,21 +16,6 @@
       {% include 'transactions/form.html' %}
 </div>
 
-<table id="transactions-list" class="table table-striped table-light">
-  <thead>
-    <tr>
-      <th>Категорія</th>
-      <th>Тип транзакції</th>
-      <th>Дата створення</th>
-      <th>Сума</th>
-    </tr>
-  </thead>
-  <tbody id="table-body">
-    {% for transaction in transactions %}
-      {% include 'transactions/transaction.html' %}
-    {% endfor %}
-  </tbody>
-</table>
 
 {% endblock %}
 

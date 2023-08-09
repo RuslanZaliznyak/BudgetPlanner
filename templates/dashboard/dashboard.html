@@ -32,4 +32,10 @@
   </div>
 {% endblock %}
 
+{% block modal %}
 
+<div id="modal" class="modal fade">
+  <div id="dialog" class="modal-dialog" hx-target="this"></div>
+</div>
+<script src="{% static 'js/add-account-modal.js' %}"></script>
+{% endblock %}

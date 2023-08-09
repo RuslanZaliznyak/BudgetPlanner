@@ -1,26 +1,26 @@
 <div>
   <ul>
-        <h5>Accounts</h5>
-        <ul class="accounts-list">
-          {% for account in accounts %}
-          <li>{{ account.name }}</li>
-          {% endfor %}
-        </ul>
-        <div class="add-another">
-          <a href="#">Add another</a>
-        </div>
 
-
-      <h5>Categories</h5>
-      {% for category in categories %}
-      <div class="category-list {{ category }}}">
-          <td scope="row">{{ category.name }}</td>
-      </div>
+    <h5>Accounts</h5>
+    <div class="account-list">
+      {% for account in accounts %}
+        <li>{{ account }}</li>
       {% endfor %}
-        <div class="more-categories">
-          <a href="#">+5 more</a>
-      </div>
+    </div>
+    <a hx-get="{% url 'finance:add_account' %}" hx-target="#dialog">
+        Add an account
+    </a>
+
+    <h5>Categories</h5>
+    <div class="category-list">
+      <ul>
+        {% for category in categories %}
+          <li>{{ category.name }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="more-categories">
+      <a href="#">+5 more</a>
+    </div>
   </ul>
-
-
 </div>

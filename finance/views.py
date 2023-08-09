@@ -1,14 +1,38 @@
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 from django.views.generic import TemplateView, ListView, CreateView
 
+from finance.forms.account import AccountForm
 from finance.forms.transaction import TransactionForm
 from finance.models.transaction import Transaction
 from finance.services.data.account import AccountData
 from finance.services.data.transaction import TransactionData
 
 
+def get_account_list(request):
+    return render(request, 'dashboard/account-str.html')
+
+
+def add_account_to_list(request):
+    if request.method == 'POST':
+        form = AccountForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse(status=204)
+
+    else:
+        form = AccountForm
+        return render(request,
+                      'dashboard/account-form.html',
+                      {'form': form})
+
+
 class DashboardView(View):
+    template_name = 'dashboard/dashboard.html'
+    initial = {'key': 'value'}
+
     @staticmethod
     def get_content(user_id):
         return {
@@ -18,16 +42,11 @@ class DashboardView(View):
             'expense_categories': [1, 2, 3]
         }
 
-    template = 'dashboard/dashboard.html'
-
-    def get(self, request):
-        return render(request,
-                      template_name=self.template,
-                      context=self.get_content(request.user.id))
-
-    def post(self, request):
-        if 'new-transactions' in request.post:
-            print('new-t')
+    def get(self, request, *args, **kwargs):
+        print(request.user.id)
+        accounts = self.get_content(13).get('accounts')
+        print(accounts)
+        return render(request, self.template_name, {"accounts": accounts})
 
 
 class TransactionsView(ListView):
@@ -68,7 +87,25 @@ class CreateTransaction(View):
                           context=context)
 
 
+class CreateAccount(View):
+    def get(self, request):
+        return render(request,
+                      'dashboard/account-form.html',
+                      context={'form': AccountForm()})
 
+    def post(self, request):
+        user_id = request.user.id
+        form = AccountForm(request.POST or None)
+
+        if form.is_valid():
+            account = form.save(commit=False)
+            account.user_id = user_id
+            account.save()
+
+            context = {'account': account}
+            return render(request,
+                          'dashboard/account-row.html',
+                          context=context)
 
 
 
