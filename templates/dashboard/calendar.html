@@ -1,55 +1,7 @@
-<div class="weekday-selector ng-isolate-scope" model="model">
-  <div class="input-group">
-  <div class="form-outline">
-    <input type="search" id="form1" class="form-control" />
-    <label class="form-label" for="form1">Search</label>
+  <div class="calendar">
+    <div class="calendar-scroll">
+      <div class="calendar-dates" id="calendarDates">
+        <!-- JavaScript will populate dates here -->
+      </div>
+    </div>
   </div>
-  <button type="button" class="btn btn-primary">
-    <i class="fas fa-search"></i>
-  </button>
-</div>
-
-  <ul>
-    <!-- ngRepeat: day in days -->
-    <li ng-repeat="day in days" tap="toggle(model, $index, tracker)" ng-class="{selected: tracker[$index]}" class="ng-scope" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-      <span class="ng-binding">S</span>
-    </li>
-    <!-- end ngRepeat: day in days -->
-
-    <!-- ngRepeat: day in days -->
-    <li ng-repeat="day in days" tap="toggle(model, $index, tracker)" ng-class="{selected: tracker[$index]}" class="ng-scope" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-      <span class="ng-binding">M</span>
-    </li>
-    <!-- end ngRepeat: day in days -->
-
-    <!-- ngRepeat: day in days -->
-    <li ng-repeat="day in days" tap="toggle(model, $index, tracker)" ng-class="{selected: tracker[$index]}" class="ng-scope" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-      <span class="ng-binding">T</span>
-    </li>
-    <!-- end ngRepeat: day in days -->
-
-    <!-- ngRepeat: day in days -->
-    <li ng-repeat="day in days" tap="toggle(model, $index, tracker)" ng-class="{selected: tracker[$index]}" class="ng-scope" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-      <span class="ng-binding">W</span>
-    </li>
-    <!-- end ngRepeat: day in days -->
-
-    <!-- ngRepeat: day in days -->
-    <li ng-repeat="day in days" tap="toggle(model, $index, tracker)" ng-class="{selected: tracker[$index]}" class="ng-scope" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-      <span class="ng-binding">T</span>
-    </li>
-    <!-- end ngRepeat: day in days -->
-
-    <!-- ngRepeat: day in days -->
-    <li ng-repeat="day in days" tap="toggle(model, $index, tracker)" ng-class="{selected: tracker[$index]}" class="ng-scope" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-      <span class="ng-binding">F</span>
-    </li>
-    <!-- end ngRepeat: day in days -->
-
-    <!-- ngRepeat: day in days -->
-    <li ng-repeat="day in days" tap="toggle(model, $index, tracker)" ng-class="{selected: tracker[$index]}" class="ng-scope" style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
-      <span class="ng-binding">S</span>
-    </li>
-    <!-- end ngRepeat: day in days -->
-  </ul>
-</div>

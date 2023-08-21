@@ -19,7 +19,7 @@ class TransactionData:
             return None
 
     @classmethod
-    def get_all_categories(cls, user_id):
+    def get_all_categories(cls):
         try:
             # BUG
             result = TransactionCategory.objects.all()

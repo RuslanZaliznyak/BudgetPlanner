@@ -20,13 +20,13 @@ def add_account_to_list(request):
         form = AccountForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse(status=204)
+            return HttpResponse(status=204, headers={'HX-Trigger': 'accountListChanged'})
 
     else:
         form = AccountForm
         return render(request,
                       'dashboard/account-form.html',
-                      {'form': form})
+                      {'form': [form]})
 
 
 class DashboardView(View):
@@ -38,15 +38,15 @@ class DashboardView(View):
         return {
             'transactions': TransactionData.get_all_by_user(user_id),
             'accounts': AccountData.get_all_by_user(user_id),
-            'categories': TransactionData.get_all_categories(user_id),
+            'categories': TransactionData.get_all_categories(),
             'expense_categories': [1, 2, 3]
         }
 
     def get(self, request, *args, **kwargs):
-        print(request.user.id)
-        accounts = self.get_content(13).get('accounts')
-        print(accounts)
-        return render(request, self.template_name, {"accounts": accounts})
+        user_id = request.user.id
+        return render(request,
+                      self.template_name,
+                      context=self.get_content(user_id=user_id))
 
 
 class TransactionsView(ListView):

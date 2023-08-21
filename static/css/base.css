@@ -11,10 +11,11 @@ body, html {
 
 .sidebar {
   flex: 0 0 5%;
-  background-color: red;
+  background-color: #ffffff;
 }
 
 .container-fluid {
   flex: 1;
-  background-color: green;
+  background-color: #ffffff;
 }
+

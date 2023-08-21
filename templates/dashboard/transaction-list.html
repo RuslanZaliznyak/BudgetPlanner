@@ -1,5 +1,5 @@
 <table class="table table-striped">
-  <thead>
+  <thead style="display: none;">
     <tr>
       <th scope="col">Category</th>
       <th scope="col">Amount</th>
@@ -8,16 +8,27 @@
     </tr>
   </thead>
   <tbody>
-    {% for transaction in transactions %}
+{% for transaction in transactions %}
     <tr>
-      <td><img src="" alt="receiver icon"></td>
-      <td scope="row">{{ transaction.category }}</td>
-      <td scope="row">{{ transaction.transaction_type }}</td>
-      <td scope="row">{{ transaction.amount }}</td>
-      <td scope="row">{{ transaction.description }}</td>
-      <td scope="row">{{ transaction.payment_method }}</td>
-      <td scope="row">{{ transaction.created_at }}</td>
+      <div class="transactions">
+        <div class="transaction-icon">
+          <span class="material-symbols-outlined">
+            phone_iphone
+          </span>
+        </div>
+        <div>
+          <ul class="transaction-title">
+            {{transaction.category}}
+          </ul>
+          <ul class="transaction-data">
+            {{transaction.created_at}}
+          </ul>
+        </div>
+        <div class="transaction-price">
+          {{transaction.amount}}
+        </div>
+      </div>
     </tr>
-    {% endfor %}
+{% endfor %}
   </tbody>
 </table>

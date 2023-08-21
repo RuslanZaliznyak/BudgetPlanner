@@ -1,26 +1,72 @@
-<div>
-  <ul>
+<div class="left-bar">
+    
+    <div class="accounts-list" hx-trigger="load, accountListChanged from:body" hx-get="{% url 'finance:get_account_list' %}" hx-target="this" style="display: none;">
+      <h5 class="accounts-header">Accounts</h5>
+      <ul class="account-ul">
+        <li>TEST ACCOUNT</li>
+        <li>TEST ACCOUNT 1</li>
+        <li>TEST ACCOUNT 2</li>
+        <li>TEST ACCOUNT 3</li>
+        {% for account in accounts %}
+          
+          <li>{{ account.name }}</li>
+        {% endfor %}
+      </ul>
 
-    <h5>Accounts</h5>
-    <div class="account-list">
-      {% for account in accounts %}
-        <li>{{ account }}</li>
-      {% endfor %}
-    </div>
-    <a hx-get="{% url 'finance:add_account' %}" hx-target="#dialog">
+      <a class="add-account" hx-get="{% url 'finance:add_account' %}" hx-target="#dialog">
         Add an account
-    </a>
+      </a>
+    </div>
+    
+    <h5 class="accounts-header">Accounts</h5>
+    <div class="accounts-list">
+      
+      <ul class="account-ul">
+        <li>Credit Agrecole</li>
+        <li>Cash</li>
+      </ul>
+    </div>
 
-    <h5>Categories</h5>
+
+    
+    <h5 class="categories-header">Categories</h5>
     <div class="category-list">
       <ul>
-        {% for category in categories %}
-          <li>{{ category.name }}</li>
-        {% endfor %}
+        <li>
+          <span class="material-symbols-outlined">
+            fastfood
+          </span>
+          Food & Beverage
+        </li>
+        <li>
+          <span class="material-symbols-outlined">
+            kitchen
+          </span>
+          Groceries
+        </li>
+        <li>
+          <span class="material-symbols-outlined">
+            house
+          </span>
+          Household
+        </li>
+        <li>
+          <span class="material-symbols-outlined">
+            car_repair
+          </span>
+          Automobile
+        </li>
       </ul>
     </div>
     <div class="more-categories">
       <a href="#">+5 more</a>
     </div>
-  </ul>
+
+    <div class="currency-selector">
+      <select>
+        <option value="USD">USD</option>
+        <option value="UAH">UAH</option>
+        <option value="PLN">PLN</option>
+      </select>
+    </div>
 </div>

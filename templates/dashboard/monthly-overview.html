@@ -1,20 +1,25 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
 
 <div class="monthly-overview">
-  <h3>Monthly overview</h3>
-
-  <div class="total-card">
-    <div class="expense">
-      <img src="{% static 'img/INCOME.png' %}" alt="expense">
+  <h1 class="monthly-header">Monthly overview</h1>
+  <div class="total-cards">
+    <div class="expense-card">
+      <h1 class="card-header">Expense</h1>
+      <img class="card-image" src="{% static 'img/dashboard/income.png' %}" alt="income">
+      <h1 class="month-expense-total">-250$</h1>
+      <h1 class="daily-expense-total">-25.55</h1>
     </div>
-
-    <div class="income">
-      <img src="{% static 'img/expense.png' %}" alt="income">
+    <div class="income-card">
+      <h1 class="card-header">Income</h1>
+      <img class="card-image" src="{% static 'img/dashboard/expenses.png' %}" alt="expenses">
+      <h1 class="month-income-total">+550$</h1>
+      <h1 class="daily-income-total">+25.55</h1>
     </div>
   </div>
-
 </div>
+
+
 
 <div class="summary-expense">
   <h3>Expenses by category</h3>

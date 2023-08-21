@@ -1,32 +1,42 @@
 {% extends 'base.html' %}
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
-
-
 {% block container-fluid %}
+
 <div class="content-wrapper">
     <div class="left-content">
       {% include 'dashboard/bar.html' %}
     </div>
 
     <div class="center-content">
-      <button type="submit">New transaction</button>
-      <div class="calendar">
-        {% include 'dashboard/calendar.html' %}
+        <div class="header-container">
+            <h4 id="dashboard-header-center">Daily Transactions</h4>
+
+            <div class="icon-container">
+                <button class="calendar-button">
+                <img id="calendar-icon" src="{% static 'img/dashboard/calendar.png' %}" alt="Calendar icon">
+            </button>
+            <button class="add-transaction-button" type="submit">
+                <img id="new-transaction-icon" src="{% static 'img/dashboard/add.png' %}" alt="Add Icon">
+            </button>
+            </div>
+
+        </div>
+      <div class="search-bar">
+          {% include 'dashboard/search-bar.html' %}
       </div>
 
       <div class="transaction-summary">
-        {% include 'dashboard/total-daily-transactions.html' %}
+          {% include 'dashboard/total-daily-transactions.html' %}
       </div>
 
       <div class="daily-transactions">
-        {% include 'dashboard/transaction-list.html' %}
+          {% include 'dashboard/transaction-list.html' %}
       </div>
     </div>
 
     <div class="right-content">
       <div class="monthly-overview">
-        {% include 'dashboard/monthly-overview.html' %}
+          {% include 'dashboard/monthly-overview.html' %}
       </div>
     </div>
   </div>
@@ -37,5 +47,6 @@
 <div id="modal" class="modal fade">
   <div id="dialog" class="modal-dialog" hx-target="this"></div>
 </div>
+<script src="{% static 'js/calendar.js' %}"></script>
 <script src="{% static 'js/add-account-modal.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,25 @@
+
+.daily-summary-table {
+    display: flex;
+  }
+
+  .transactions {
+    display: flex;
+    align-items: center; /* Центрувати елементи по вертикалі */
+    margin-top: 30px;
+  }
+
+  .transaction-icon {
+    margin-left: 55px; /* Задайте відступ для іконки */
+  }
+
+  .transaction-title,
+  .transaction-data {
+    margin: 0; /* Скиньте зовнішні відступи для ul елементів */
+    
+    list-style-type: none; /* Забороніть маркери списку */
+  }
+
+  .transaction-price {
+    margin-left: 230px;
+  }

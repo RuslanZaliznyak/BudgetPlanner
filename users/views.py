@@ -14,7 +14,7 @@ from .utils.token_generator import TokenGenerator
 
 class UserLoginView(LoginView):
     def get_default_redirect_url(self):
-        return reverse('dashboard')
+        return reverse('finance:dashboard')
 
 
 class UserLogoutView(LogoutView):

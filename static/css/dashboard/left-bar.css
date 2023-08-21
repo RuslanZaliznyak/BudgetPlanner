@@ -1,0 +1,54 @@
+.left-bar {
+    width: 230px;
+}
+
+
+
+
+.accounts-header {
+font-size: 16px;
+margin-top: 80px;
+margin-left: 20px;
+}
+
+
+.account-ul {
+  list-style-type: disc;
+  padding-left: 30px;
+  display: inline-block;
+  text-align: left;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.add-account {
+margin-left: 30px;
+}
+
+
+.categories-header {
+    font-size: 16px;
+    margin-top: 80px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    }
+
+.category-list ul {
+  list-style: none;
+  padding: 0;
+  margin-left: 20px;
+}
+
+.category-list li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.category-icon {
+  margin-right: 10px; 
+}
+
+
+
+
