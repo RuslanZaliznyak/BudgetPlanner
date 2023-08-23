@@ -1,0 +1,31 @@
+.expense-cards {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .expense-cards .card-1 {
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    width: 360px;
+    height: 80px;
+    background-color: #E6123420;
+  }
+  
+  .expense-cards .card-1 .info {
+    margin-top: 5px;
+  }
+  
+  .expense-cards .card-1 .name {
+    font-weight: bold;
+  }
+  
+  .expense-cards .card-1 .percent {
+    color: #007bff;
+    position: relative;
+  }
+  
+  .expense-cards .card-1 .total-count {
+    color: #ff0000; /* Червоний колір для суми */
+  }
+  
